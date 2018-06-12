@@ -1,5 +1,5 @@
 <template>
-    <h1>Music View</h1>
+  <h1>Music View</h1>
 </template>
 
 <script>
