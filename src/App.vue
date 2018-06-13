@@ -27,11 +27,12 @@ body
   margin: 0
   padding: 0
   overflow-x: hidden
+  background-color: #313030
 
 
 // transition slide
 .slide-enter
-  transform: translateY(50%)
+  transform: translateY(30%)
   opacity: 0
 
 .slide-enter-to
@@ -39,7 +40,7 @@ body
   opacity: 1
 
 .slide-enter-active
-  transition: all .3s ease;
+  transition: all .2s ease;
 
 .slide-leave
   transform: translateX(0)
@@ -51,7 +52,7 @@ body
   opacity: 0
 
 .slide-leave-active
-  transition: all .3s ease
+  transition: all .2s ease
 
 </style>
 
