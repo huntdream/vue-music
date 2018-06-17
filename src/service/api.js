@@ -1,8 +1,8 @@
-import fetch from '../utils/fetch';
+import fetch from '../utils/fetch'
 
-const host = 'http://netease.maoyu.info';
+const host = 'https://netease.maoyu.info'
 
 export const userdetail = (id = 32693089) =>
   fetch(`${host}/user/detail?uid=${id}`).catch(err => {
-    if (err) throw err;
-  });
+    if (err) throw err
+  })
