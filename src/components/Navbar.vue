@@ -14,42 +14,46 @@
 
 <script>
 export default {
-    name:'navbar'
+  name: 'navbar'
 }
 </script>
 
 <style lang="sass">
 .top-nav 
+    position: fixed
+    top: 0
+    width: 100%
     display: flex
     flex-direction: row
     justify-content: center
     height: 3rem
     line-height: 3rem
-    background-color: #ff0000
+    background-color: #a29ee6
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+    z-index: 999
 
 .nav-item
     color: #fff
     font-weight: 500
 
     &:hover
-        background-color: #d61002
+        background-color: #7d7ab5
 
     &.active
-        background-color: #d61002
+        background-color: #7d7ab5
     
     .nav-icon
         display: block
-        background-repeat: no-repeat
-        background-position: center;
+        background: no-repeat center;
         background-size: 42%;
         width: 3rem
         height: 3rem
-        padding: 0 1rem
+        margin: 0 1rem
         &.me
             background-image: url(../assets/me.png)
 
         &.community
             background-image: url(../assets/community.png)
         &.music
-            background-image:url(../assets/music.png)
+            background-image: url(../assets/music.png)
 </style>
