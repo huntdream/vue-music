@@ -13,7 +13,8 @@
         </div>
         <div class="user-playlist">
             <div class="user-custom-playlist">
-                <div class="playlist" v-for="playlist in userplaylist" :key="playlist.id">
+                <div class="playlist-label">我创建的歌单</div>
+                <div class="playlist-item" v-for="playlist in userplaylist" :key="playlist.id">
                     <div class="playlist-cover">
                         <img :src="playlist.coverImgUrl" alt="cover">
                     </div>
@@ -60,6 +61,11 @@
 <style lang="sass">
     .user-wrap
         .userdetail-wrap
+            position: fixed
+            top: 48px
+            height: 250px
+            z-index: -1
+            width: 100%
             .userdetail
                 width: 100%
                 height: 250px
@@ -94,27 +100,31 @@
         .user-playlist
             background-color: #fff
             width: 100%
+            margin-top: 300px
             .user-custom-playlist
-                padding-top: 0.5rem
-
-            .playlist
-                display: flex
-                flex-direction: row
-                width: 100%
-                height: 3rem
-                padding: 0 16px
-                margin: 4px 0
-                align-items: center
-                .playlist-cover
-                    margin: 4px 1.5rem 4px 0
-                    width: 3rem
+                .playlist-label
+                    height: 2rem
+                    padding: 0 0.5rem
+                    line-height: 2rem
+                    background-color: #eee
+                .playlist-item
+                    display: flex
+                    flex-direction: row
+                    width: 100%
                     height: 3rem
-                    img
-                        width: 40px
-                        height: 40px
-                        margin: 4px 0
-                        border-radius: 4px
+                    padding: 0 16px
+                    margin: 4px 0
+                    align-items: center
 
-                .playlist-name
-                    flex: 1
+                    .playlist-cover
+                        margin: 4px 1.5rem 4px 0
+                        width: 3rem
+                        height: 3rem
+                        img
+                            width: 40px
+                            height: 40px
+                            margin: 4px 0
+                            border-radius: 4px
+                    .playlist-name
+                        flex: 1
 </style>
