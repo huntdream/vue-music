@@ -1,6 +1,7 @@
 # Vue Music
 
 A simple project to learn Vue and master git
+[Demo](https://music.maoyu.info)
 
 ## Usage
 
