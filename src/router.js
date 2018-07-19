@@ -3,11 +3,12 @@ import Router from 'vue-router'
 import Me from '@/views/Me'
 import Music from '@/views/Music'
 import Community from '@/views/Community'
+import Playlist from '@/views/Playlist'
 
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',
+  mode: 'history',
   routes: [{
     path: '/',
     name: 'music',
@@ -22,8 +23,10 @@ export default new Router({
       path: '/community',
       name: 'community',
       component: Community
-    },{
-    path:'/playlist/detail'
+    }, {
+      path: '/playlist/:id',
+      name: 'playlist',
+      component: Playlist
     }
   ]
 })
