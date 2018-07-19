@@ -19,7 +19,7 @@ export default {
       return userdetail().then(res => commit('saveDetail', res))
     },
     playlist({ commit }) {
-      return userplaylist().then(res => commit('savePlaylist', res))
+      return userplaylist().then(res => commit('savePlaylist', res.playlist))
     }
   }
 }

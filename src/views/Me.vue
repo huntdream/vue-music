@@ -47,16 +47,11 @@ export default {
   },
   computed: {
     ...mapState({
-      userdetail: 'user/detail',
-      userplaylist: 'user/playlist'
+      userdetail: state => state.user.detail,
+      userplaylist: state => state.user.playlist
     })
   },
-  methods: {
-    queryuserdetail() {
-      userdetail().then(res => (this.userdetail = res))
-      userplaylist().then(res => (this.userplaylist = res.playlist))
-    }
-  }
+  methods: {}
 }
 </script>
 
