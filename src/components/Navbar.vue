@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    name: 'navbar',
+    name: 'Navbar',
     data() {
       return {
         isAlpha: false
