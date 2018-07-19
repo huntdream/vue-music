@@ -766,7 +766,7 @@
 
 "@vue/cli-service@^3.0.0-beta.15":
   version "3.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-3.0.0-beta.16.tgz#72cfa725ae8b003cb201af6632848b1b7b0b4c00"
+  resolved "https://registry.yarnpkg.com/@vue/cli-api/-/cli-api-3.0.0-beta.16.tgz#72cfa725ae8b003cb201af6632848b1b7b0b4c00"
   dependencies:
     "@vue/cli-overlay" "^3.0.0-beta.16"
     "@vue/cli-shared-utils" "^3.0.0-beta.16"
@@ -1423,7 +1423,7 @@ bonjour@^3.5.0:
     dns-equal "^1.0.0"
     dns-txt "^2.0.2"
     multicast-dns "^6.0.1"
-    multicast-dns-service-types "^1.1.0"
+    multicast-dns-api-types "^1.1.0"
 
 boolbase@~1.0.0:
   version "1.0.0"
@@ -4538,7 +4538,7 @@ ms@2.0.0:
 
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz#899f11d9686e5e05cb91b35d5f0e63b773cfc901"
+  resolved "https://registry.yarnpkg.com/multicast-dns-api-types/-/multicast-dns-api-types-1.1.0.tgz#899f11d9686e5e05cb91b35d5f0e63b773cfc901"
 
 multicast-dns@^6.0.1:
   version "6.2.3"

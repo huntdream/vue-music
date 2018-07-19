@@ -1,5 +1,5 @@
 <template>
-    <div class="user-wrap" v-if="userdetail.profile">
+    <div class="user-wrap" v-if="userdetail">
         <div class="userdetail-wrap">
             <div class="userdetail">
                 <img class="user-bg" :src="userdetail.profile.backgroundUrl"/>
@@ -14,14 +14,15 @@
         <div class="user-playlist">
             <div class="user-custom-playlist">
                 <div class="playlist-label">我创建的歌单</div>
-                <div class="playlist-item" v-for="playlist in userplaylist" :key="playlist.id">
+                <router-link :to="{name: 'playlist',params:{id: playlist.id}}" tag="div" class="playlist-item"
+                             v-for="playlist in userplaylist" :key="playlist.id">
                     <div class="playlist-cover">
                         <img :src="playlist.coverImgUrl" alt="cover">
                     </div>
                     <div class="playlist-name">
                         {{playlist.name}}
                     </div>
-                </div>
+                </router-link>
             </div>
             <div class="user-subscribed-playlist"></div>
         </div>
@@ -30,32 +31,33 @@
 </template>
 
 <script>
-  import {userdetail, userplaylist} from '@/service/api'
-  import debounce from 'lodash/debounce'
-  import Spinner from '@/components/Spinner'
+import { userdetail, userplaylist } from '@/api'
+import { mapGetters, mapState } from 'vuex'
+import Spinner from '@/components/Spinner'
 
-  export default {
-    name: 'me',
-    components: {Spinner},
-    data() {
-      return {userdetail: [], userplaylist: [], uid: ''}
-    },
-    created() {
-      this.queryuserdetail()
-      this.debounceQuery = debounce(this.queryuserdetail, 500)
-    },
-    methods: {
-      queryuserdetail() {
-        userdetail().then(res => this.userdetail = res)
-        userplaylist().then(res => this.userplaylist = res.playlist)
-      }
-    },
-    watch: {
-      uid: function () {
-        this.debounceQuery(this.uid)
-      }
+export default {
+  name: 'Me',
+  components: { Spinner },
+  data() {
+    return {}
+  },
+  created() {
+    this.$store.dispatch('user/detail')
+    this.$store.dispatch('user/playlist')
+  },
+  computed: {
+    ...mapState({
+      userdetail: 'user/detail',
+      userplaylist: 'user/playlist'
+    })
+  },
+  methods: {
+    queryuserdetail() {
+      userdetail().then(res => (this.userdetail = res))
+      userplaylist().then(res => (this.userplaylist = res.playlist))
     }
   }
+}
 </script>
 
 <style lang="sass">
