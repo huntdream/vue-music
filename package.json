@@ -31,7 +31,12 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "linebreak-style": [
+        "error",
+        "unix"
+      ]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
