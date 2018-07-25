@@ -1,28 +1,28 @@
 <template>
-    <div>Play list here</div>
+    <div class="playlist-wrap">
+      <div class="playlist-name">{{playlistdetail.name}}</div>
+    </div>
 </template>
 
 <script>
-  import {playlistdetail} from '../api/index'
+import { mapState } from 'vuex'
 
-  export default {
-    name: 'Playlist',
-    data() {
-      return {
-        playlist: []
-      }
-    },
-    created() {
-      this.getplaylistdetail()
-    },
-    methods: {
-      getplaylistdetail() {
-        playlistdetail(this.$route.params.id).then(res => this.playlist = res)
-      }
-    }
-  }
+export default {
+  name: 'Playlist',
+  data() {
+    return {}
+  },
+  created() {
+    this.$store.dispatch('playlist/detail', this.$route.params.id)
+  },
+  computed: {
+    ...mapState({
+      playlistdetail: state => state.playlist.detail
+    })
+  },
+  methods: {}
+}
 </script>
 
 <style scoped>
-
 </style>

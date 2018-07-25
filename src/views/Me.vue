@@ -31,8 +31,7 @@
 </template>
 
 <script>
-import { userdetail, userplaylist } from '@/api'
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import Spinner from '@/components/Spinner'
 
 export default {
