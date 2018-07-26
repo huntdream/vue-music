@@ -1,5 +1,5 @@
 <template>
-    <div class="user-wrap" v-if="userdetail">
+    <div class="user-wrap" v-if="userdetail.code">
         <div class="userdetail-wrap">
             <div class="userdetail">
                 <img class="user-bg" :src="userdetail.profile.backgroundUrl"/>
@@ -13,7 +13,7 @@
         </div>
         <div class="user-playlist">
             <div class="user-custom-playlist">
-                <div class="playlist-label">我创建的歌单</div>
+                <div class="playlist-label my-playlist">我创建的歌单</div>
                 <router-link :to="{name: 'playlist',params:{id: playlist.id}}" tag="div" class="playlist-item"
                              v-for="playlist in userplaylist" :key="playlist.id">
                     <div class="playlist-cover">
@@ -103,6 +103,9 @@ export default {
                     padding: 0 0.5rem
                     line-height: 2rem
                     background-color: #eee
+                    &.my-playlist
+                        position: sticky
+                        top: 48px
                 .playlist-item
                     display: flex
                     flex-direction: row
