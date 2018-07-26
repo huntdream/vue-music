@@ -3,9 +3,7 @@
         <navbar></navbar>
         <div class="container">
             <transition name="slide" mode="out-in">
-                <keep-alive>
                     <router-view></router-view>
-                </keep-alive>
             </transition>
         </div>
     </div>
