@@ -12,17 +12,19 @@
             </div>
         </div>
         <div class="user-playlist">
-            <div class="user-custom-playlist">
-                <div class="playlist-label my-playlist">我创建的歌单</div>
-                <router-link :to="{name: 'playlist',params:{id: playlist.id}}" tag="div" class="playlist-item"
-                             v-for="playlist in userplaylist" :key="playlist.id">
-                    <div class="playlist-cover">
-                        <img :src="playlist.coverImgUrl" alt="cover">
-                    </div>
-                    <div class="playlist-name">
-                        {{playlist.name}}
-                    </div>
-                </router-link>
+            <div class="user-custom-playlist" >
+                <template v-for="(playlist,index) in userplaylist" >
+                    <div class="playlist-label my-playlist" v-if="index === 0" :key="playlist.id">我创建的歌单</div>
+                    <div class="playlist-label my-playlist" v-if="index === 12" :key="playlist.id">我收藏的歌单</div>
+                    <router-link :to="{name: 'playlist',params:{id: playlist.id}}" tag="div" class="playlist-item" :key="playlist.id">
+                        <div class="playlist-cover">
+                            <img :src="playlist.coverImgUrl" alt="cover">
+                        </div>
+                        <div class="playlist-name">
+                            {{playlist.name}}
+                        </div>
+                    </router-link>
+                </template>
             </div>
             <div class="user-subscribed-playlist"></div>
         </div>
@@ -47,7 +49,8 @@ export default {
   computed: {
     ...mapState({
       userdetail: state => state.user.detail,
-      userplaylist: state => state.user.playlist
+      userplaylist: state => state.user.playlist,
+      playlistcount: state => state.user.playlistcount
     })
   },
   methods: {}
