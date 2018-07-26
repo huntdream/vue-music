@@ -2,9 +2,9 @@
     <div id="app">
         <navbar></navbar>
         <div class="container">
-            <transition name="slide" mode="out-in">
+            <!-- <transition name="slide" mode="out-in"> -->
                     <router-view></router-view>
-            </transition>
+            <!-- </transition> -->
         </div>
     </div>
 </template>
