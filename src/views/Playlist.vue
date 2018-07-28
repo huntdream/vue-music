@@ -4,6 +4,11 @@
         <img :src="playlist.coverImgUrl" alt="playlist.name" />
         <h1>{{playlist.name}}</h1>
       </div>
+      <div class="playlist-tracks-wrap">
+        <template v-for="track in playlist.tracks">
+          <div class="track-item" :key="track.id">{{track.name}}</div>
+        </template>
+      </div>
     </div>
     <spinner v-else></spinner>
 </template>
@@ -38,4 +43,12 @@ export default {
         height: 5rem
         border-radius: 5px
         margin: 1rem
+    
+    .playlist-tracks-wrap
+      .track-item
+        padding: 1rem 1rem
+        border: 1px solid #eee
+
+        &:not(:last-child)
+          border-bottom: none
 </style>
