@@ -9,13 +9,14 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  routes: [{
-    path: '/',
-    name: 'music',
-    component: Music
-  },
+  routes: [
     {
-      path: '/me',
+      path: '/music',
+      name: 'music',
+      component: Music
+    },
+    {
+      path: '/',
       name: 'me',
       component: Me
     },
@@ -23,7 +24,8 @@ export default new Router({
       path: '/community',
       name: 'community',
       component: Community
-    }, {
+    },
+    {
       path: '/playlist/:id',
       name: 'playlist',
       component: Playlist
