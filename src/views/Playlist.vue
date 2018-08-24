@@ -3,10 +3,11 @@
       <div class="playlist-detail-wrap">
         <img :src="playlist.coverImgUrl" alt="playlist.name" />
         <h1>{{playlist.name}}</h1>
+        <button class="btn" v-ripple>Ripple</button>
       </div>
       <div class="playlist-tracks-wrap">
         <template v-for="track in playlist.tracks">
-          <div class="track-item" :key="track.id">{{track.name}}</div>
+          <div class="track-item" :key="track.id" v-ripple>{{track.name}}</div>
         </template>
       </div>
     </div>

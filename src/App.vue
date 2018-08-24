@@ -59,5 +59,36 @@ export default {
     .container
         margin-top: 48px
 
+    .btn
+        border: none
+        padding: 0.6rem 1rem
+        outline: none
+        position: relative
+        cursor: pointer
+        overflow: hidden
+
+    .ripple-container
+        pointer-events: none
+        position: relative
+        width: 100%
+        height: 100%
+        overflow: hidden
+
+        .ripple
+            display: block
+            transform: scale(0)
+            border-radius: 100%
+            width: 1px
+            height: 1px
+            position: absolute
+            opacity: 0.75
+            background-color: #eee
+            animation: ripple 2s 
+        
+    @keyframes ripple
+        to
+            opacity: 0
+            transform: scale(6)
+
 </style>
 
