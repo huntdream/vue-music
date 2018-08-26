@@ -6,15 +6,17 @@
                     <router-view></router-view>
             <!-- </transition> -->
         </div>
+        <Player></Player>
     </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/Navbar';
+import Player from '@/components/Player';
 
 export default {
-  components: { Navbar }
-}
+  components: { Navbar, Player }
+};
 </script>
 
 <style lang="sass">

@@ -1,14 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import user from './modules/user'
-import playlist from './modules/playlist'
+import user from './modules/user';
+import playlist from './modules/playlist';
+import song from './modules/song';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     user,
-    playlist
+    playlist,
+    song
   }
-})
+});

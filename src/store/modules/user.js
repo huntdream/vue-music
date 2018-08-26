@@ -1,4 +1,4 @@
-import { userdetail, userplaylist } from '../../api/index'
+import { userdetail, userplaylist } from '../../api';
 
 export default {
   namespaced: true,
@@ -9,24 +9,24 @@ export default {
   },
   mutations: {
     saveDetail(state, detail) {
-      state.detail = detail
+      state.detail = detail;
     },
     savePlaylist(state, playlist) {
-      state.playlist = playlist
+      state.playlist = playlist;
     },
     setPlaylistCount(state, count) {
-      state.playlistcount = count
+      state.playlistcount = count;
     }
   },
   actions: {
     detail({ commit }) {
       return userdetail().then(res => {
-        commit('saveDetail', res)
-        commit('setPlaylistCount', res.profile.playlistCount)
-      })
+        commit('saveDetail', res);
+        commit('setPlaylistCount', res.profile.playlistCount);
+      });
     },
     playlist({ commit }) {
-      return userplaylist().then(res => commit('savePlaylist', res.playlist))
+      return userplaylist().then(res => commit('savePlaylist', res.playlist));
     }
   }
-}
+};

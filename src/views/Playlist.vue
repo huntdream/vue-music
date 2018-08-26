@@ -3,11 +3,10 @@
       <div class="playlist-detail-wrap">
         <img :src="playlist.coverImgUrl" alt="playlist.name" />
         <h1>{{playlist.name}}</h1>
-        <button class="btn" v-ripple>Ripple</button>
       </div>
       <div class="playlist-tracks-wrap">
         <template v-for="track in playlist.tracks">
-          <div class="track-item" :key="track.id" v-ripple>{{track.name}}</div>
+          <Song :key="track.id" :name="track.name" :id="track.id"></Song>
         </template>
       </div>
     </div>
@@ -15,17 +14,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Spinner from '@/components/Spinner'
+import { mapState } from 'vuex';
+import Spinner from '@/components/Spinner';
+import Song from '@/components/Song';
 
 export default {
   name: 'Playlist',
-  components: { Spinner },
+  components: { Spinner, Song },
   data() {
-    return {}
+    return {};
   },
   created() {
-    this.$store.dispatch('playlist/detail', this.$route.params.id)
+    this.$store.dispatch('playlist/detail', this.$route.params.id);
   },
   computed: {
     ...mapState({
@@ -33,7 +33,7 @@ export default {
     })
   },
   methods: {}
-}
+};
 </script>
 
 <style lang="sass" scoped>
@@ -46,10 +46,5 @@ export default {
         margin: 1rem
     
     .playlist-tracks-wrap
-      .track-item
-        padding: 1rem 1rem
-        border: 1px solid #eee
-
-        &:not(:last-child)
-          border-bottom: none
+      
 </style>
