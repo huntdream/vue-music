@@ -1,5 +1,5 @@
 <template>
-  <div class="song" @click="play(id,name)">
+  <div class="song" @click="play(id)">
     {{name}}
   </div>
 </template>
@@ -16,8 +16,9 @@ export default {
     })
   },
   methods: {
-    play(id, name) {
-      this.$store.dispatch('song/detail', { id, name });
+    play(id) {
+      this.$store.dispatch('song/url', id);
+      this.$store.dispatch('song/detail', id);
     }
   }
 };
