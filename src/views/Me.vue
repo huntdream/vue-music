@@ -15,7 +15,7 @@
             <div class="user-custom-playlist" >
                 <template v-for="(playlist,index) in userplaylist" >
                     <div class="playlist-label my-playlist" v-if="index === 0" :key="index">我创建的歌单</div>
-                    <div class="playlist-label my-playlist" v-if="index === 12" :key="index">我收藏的歌单</div>
+                    <div class="playlist-label my-playlist" v-if="index === playlistcount" :key="index">我收藏的歌单</div>
                     <router-link :to="{name: 'playlist',params:{id: playlist.id}}" tag="div" class="playlist-item" :key="playlist.id">
                         <div class="playlist-cover">
                             <img :src="playlist.coverImgUrl" alt="cover">
@@ -33,18 +33,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Spinner from '@/components/Spinner'
+import { mapState } from 'vuex';
+import Spinner from '@/components/Spinner';
 
 export default {
   name: 'Me',
   components: { Spinner },
   data() {
-    return {}
+    return {};
   },
   created() {
-    this.$store.dispatch('user/detail')
-    this.$store.dispatch('user/playlist')
+    this.$store.dispatch('user/detail');
+    this.$store.dispatch('user/playlist');
   },
   computed: {
     ...mapState({
@@ -54,7 +54,7 @@ export default {
     })
   },
   methods: {}
-}
+};
 </script>
 
 <style lang="sass">
@@ -108,7 +108,7 @@ export default {
                     background-color: #eee
                     &.my-playlist
                         position: sticky
-                        top: 48px
+                        top: 3rem
                 .playlist-item
                     display: flex
                     flex-direction: row
