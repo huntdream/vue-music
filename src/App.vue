@@ -22,7 +22,7 @@ export default {
 <style lang="sass">
     html
         width: 100%
-        font-size: 16px
+        font-size: 14px
         font-family: 微软雅黑
 
     body
@@ -32,6 +32,10 @@ export default {
         margin: 0
         padding: 0
         overflow-x: hidden
+    
+    html,body,h1,h2,h3,ul,p
+        margin: 0
+        padding: 0
 
     *,:after,:before
         box-sizing: border-box
