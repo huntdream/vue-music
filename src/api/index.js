@@ -13,5 +13,8 @@ export const userplaylist = () =>
 export const playlistdetail = pid =>
   axios.get(`/playlist/detail?id=${pid}`).then(res => res.data);
 
-export const songdetail = id =>
+export const songurl = id =>
   axios.get(`/music/url?id=${id}`).then(res => res.data);
+
+export const songdetail = id =>
+  axios.get(`/song/detail?ids=${id}`).then(res => res.data);
