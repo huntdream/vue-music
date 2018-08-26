@@ -1,27 +1,32 @@
-import { songdetail } from '../../api';
+import { songurl, songdetail } from '../../api';
 
 export default {
   namespaced: true,
   state: {
+    url: [],
     detail: []
   },
   mutations: {
+    url(state, url) {
+      state.url = url;
+    },
     detail(state, detail) {
       state.detail = detail;
     }
   },
   actions: {
-    detail({ commit }, { id, name }) {
-      console.log(name, id);
-      return songdetail(id).then(res => {
+    url({ commit }, id) {
+      return songurl(id).then(res => {
         if (typeof id === 'number') {
-          const data = res.data[0];
-          console.log(data);
-          data.name = name;
-          commit('detail', data);
+          commit('url', res.data[0]);
         } else {
-          commit('detail', res.data);
+          commit('url', res.data);
         }
+      });
+    },
+    detail({ commit }, id) {
+      return songdetail(id).then(res => {
+        commit('detail', res.songs);
       });
     }
   }
