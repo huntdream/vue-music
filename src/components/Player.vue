@@ -15,8 +15,11 @@
       <div class="control">
         <div :class="['play',isPlaying?'playing':'paused']" @click="play"></div>
       </div>
+      <div class="duration-indicator-bg">
+        <div class="duration-indicator" :style="{'transform':timeRatio}"></div>
+      </div>
     </div>
-    <audio :src="url?url.url:''" id="player" ref="player" ></audio>
+    <audio :src="url?url.url:''" id="player" ref="player"></audio>
   </div>
 </template>
 
@@ -28,14 +31,20 @@ export default {
   props: {},
   data() {
     return {
-      isPlaying: false
+      isPlaying: false,
+      duration: 0,
+      currentTime: 0
     };
   },
   computed: {
     ...mapState({
       detail: state => state.song.detail[0],
       url: state => state.song.url
-    })
+    }),
+    timeRatio() {
+      const ratio = this.currentTime / this.duration * 100 - 100;
+      return `translateX(${ratio}%)`;
+    }
   },
   watch: {
     url(now, prev) {
@@ -43,8 +52,10 @@ export default {
       if (now !== prev) {
         player.pause();
         player.load();
-        player.oncanplay = function() {
+        player.oncanplay = () => {
           player.play();
+          console.log(player.duration);
+          this.duration = player.duration;
         };
       }
     }
@@ -56,6 +67,9 @@ export default {
     });
     player.addEventListener('pause', () => {
       this.isPlaying = false;
+    });
+    player.addEventListener('timeupdate', () => {
+      this.currentTime = player.currentTime;
     });
   },
   methods: {
@@ -87,14 +101,15 @@ export default {
     display: flex
     flex-direction: row
     align-items: center
-    height: 60px
+    height: 48px
+    position: relative
 
     .cover
-      height: 60px
-      width: 60px
+      height: 48px
+      width: 48px
       img
-        height: 60px
-        width: 60px
+        height: 48px
+        width: 48px
 
     .info
       height: 100%
@@ -117,9 +132,25 @@ export default {
         background-size: contain
         height: 36px
         width: 36px
-        margin: 12px
+        margin: 6px
         &.playing
           background-image: url(../assets/pause.png)
         &.paused
           background-image: url(../assets/play.png)
+    .duration-indicator-bg
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      padding-left: 48px
+      height: 48px
+      overflow: hidden
+      z-index: -1
+      .duration-indicator
+        display: inline-block
+        width: 100%
+        transform: translateX(-100%)
+        height: 48px
+        background: #2b2424
+        transition: width 1000ms linear
 </style>
