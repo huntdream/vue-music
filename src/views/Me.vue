@@ -108,7 +108,7 @@ export default {
                     background-color: #eee
                     &.my-playlist
                         position: sticky
-                        top: 3rem
+                        top: 3.5rem
                 .playlist-item
                     display: flex
                     flex-direction: row
