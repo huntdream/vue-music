@@ -77,13 +77,13 @@ export default {
   methods: {
     toggleFull(e) {
       if (!e.target.classList.contains('play') && !e.target.classList.contains('togglemini')) {
-        console.log('I honw')
-        this.mini = false
+        this.mini = false;
+        document.body.style.overflow = 'hidden';
       }
     },
     toggleMini() {
-      console.log('haha', this.mini)
-      this.mini = true
+      document.body.style.overflow = 'auto';
+      this.mini = true;
     },
     play() {
       const player = this.$refs.player;
