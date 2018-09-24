@@ -2,7 +2,7 @@
     <div class="user-wrap" v-if="userdetail.code">
         <div class="userdetail-wrap">
             <div class="userdetail">
-                <img class="user-bg" :src="userdetail.profile.backgroundUrl"/>
+                <img class="user-bg" :src="userdetail.profile.backgroundUrl" />
                 <img class="user-avatar" :src="userdetail.profile.avatarUrl" alt="avatar">
                 <div class="user-info">
                     <p class="user-info-name">
@@ -12,8 +12,8 @@
             </div>
         </div>
         <div class="user-playlist">
-            <div class="user-custom-playlist" >
-                <template v-for="(playlist,index) in userplaylist" >
+            <div class="user-custom-playlist">
+                <template v-for="(playlist,index) in userplaylist">
                     <div class="playlist-label my-playlist" v-if="index === 0" :key="index">我创建的歌单</div>
                     <div class="playlist-label my-playlist" v-if="index === playlistcount" :key="index">我收藏的歌单</div>
                     <router-link :to="{name: 'playlist',params:{id: playlist.id}}" tag="div" class="playlist-item" :key="playlist.id">
@@ -37,23 +37,23 @@ import { mapState } from 'vuex';
 import Spinner from '@/components/Spinner';
 
 export default {
-  name: 'Me',
-  components: { Spinner },
-  data() {
-    return {};
-  },
-  created() {
-    this.$store.dispatch('user/detail');
-    this.$store.dispatch('user/playlist');
-  },
-  computed: {
-    ...mapState({
-      userdetail: state => state.user.detail,
-      userplaylist: state => state.user.playlist,
-      playlistcount: state => state.user.playlistcount
-    })
-  },
-  methods: {}
+    name: 'Me',
+    components: { Spinner },
+    data() {
+        return {};
+    },
+    created() {
+        this.$store.dispatch('user/detail');
+        this.$store.dispatch('user/playlist');
+    },
+    computed: {
+        ...mapState({
+            userdetail: state => state.user.detail,
+            userplaylist: state => state.user.playlist,
+            playlistcount: state => state.user.playlistcount
+        })
+    },
+    methods: {}
 };
 </script>
 
@@ -108,7 +108,7 @@ export default {
                     background-color: #eee
                     &.my-playlist
                         position: sticky
-                        top: 3.5rem
+                        top: 3.2rem
                 .playlist-item
                     display: flex
                     flex-direction: row
