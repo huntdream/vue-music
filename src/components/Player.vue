@@ -1,24 +1,25 @@
 <template>
-  <div :class="{'player-wrap':true, show:!!url.url}" >
+  <div :class="{'player-wrap':true, show:!!url.url,full:!mini}" @click="toggleFull">
     <div class="player" v-if="detail">
       <div class="cover">
-        <img :src="detail.al.picUrl" alt="Cover">
+        <img :src="detail.al.picUrl" alt="Cover" :class="isPlaying?'playing':'paused'">
       </div>
       <div class="info">
         <p class="name">{{detail.name}}</p>
         <p class="author">
-          <template v-for="author in detail.ar" >
-              {{author.name}}
+          <template v-for="author in detail.ar">
+            {{author.name}}
           </template>
         </p>
       </div>
       <div class="control">
         <div :class="['play',isPlaying?'playing':'paused']" @click="play"></div>
       </div>
-      <div class="duration-indicator-bg">
+      <div class="duration-indicator-bg" v-if="mini">
         <div class="duration-indicator" :style="{'transform':timeRatio}"></div>
       </div>
     </div>
+    <div class="togglemini" v-if="!mini" @click="toggleMini"></div>
     <audio :src="url?url.url:''" id="player" ref="player"></audio>
   </div>
 </template>
@@ -33,7 +34,8 @@ export default {
     return {
       isPlaying: false,
       duration: 0,
-      currentTime: 0
+      currentTime: 0,
+      mini: true
     };
   },
   computed: {
@@ -73,6 +75,16 @@ export default {
     });
   },
   methods: {
+    toggleFull(e) {
+      if (!e.target.classList.contains('play') && !e.target.classList.contains('togglemini')) {
+        console.log('I honw')
+        this.mini = false
+      }
+    },
+    toggleMini() {
+      console.log('haha', this.mini)
+      this.mini = true
+    },
     play() {
       const player = this.$refs.player;
       if (this.isPlaying) {
@@ -92,24 +104,30 @@ export default {
   bottom: -56px
   left: 0
   right: 0
-  background-color: #090a0d
+  background-color: #7b5757
   transition: all .3s ease-in-out
+  z-index: 999
+  height: 48px
+  transition: all 300ms
   &.show
       bottom: 0
       opacity: 1
+
   .player
     display: flex
     flex-direction: row
     align-items: center
     height: 48px
     position: relative
-
+    transition: all 300ms
     .cover
       height: 48px
       width: 48px
       img
-        height: 48px
-        width: 48px
+        height: 100%
+        width: 100%
+        &.paused
+          animation-play-state: paused
 
     .info
       height: 100%
@@ -123,9 +141,16 @@ export default {
       .author
         color: #a2bbcc
         font-size: 0.75rem
+
     .control
       margin-left: auto
       margin-right: 2rem
+      position: absolute
+      right: 0
+      bottom: 0
+      height: 48px
+      width: 48px
+      transition: all 300ms
       .play
         background-repeat: no-repeat
         background-position: center center
@@ -153,4 +178,46 @@ export default {
         height: 48px
         background: #2b2424
         transition: width 1000ms linear
+  &.full
+    bottom: 0
+    height: 100vh
+    .player
+      height: 100%
+      width: 100%
+    .info
+      position: absolute
+      top: 0
+      left: 0
+      height: 3.2rem
+    .cover
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      width: 240px
+      height: 240px
+      img
+        animation: rotate 10s linear infinite
+        border-radius: 50%
+    .control
+      bottom: 18%
+      right: 50%
+      transform: translateX(50%)
+      margin: 0
+    .togglemini
+      width: 28px
+      height: 28px
+      margin: 10px
+      position: absolute
+      top: 0
+      right: 0
+      background-image: url(../assets/arrow-down.png)
+      background-repeat: no-repeat
+      background-size: cover
+
+@keyframes rotate
+  from
+    transform: rotate(0)
+  to
+    transform: rotate(1turn)
 </style>
