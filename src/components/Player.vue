@@ -4,24 +4,24 @@
       <div class="cover">
         <img :src="detail.al.picUrl" alt="Cover" :class="isPlaying?'playing':'paused'">
       </div>
-      <div class="info">
-        <p class="name">{{detail.name}}</p>
-        <p class="author">
-          <template v-for="author in detail.ar">
-            {{author.name}}
-          </template>
-        </p>
+        <div class="info">
+          <p class="name">{{detail.name}}</p>
+          <p class="author">
+            <template v-for="author in detail.ar">
+              {{author.name}}
+            </template>
+          </p>
+        </div>
+        <div class="control">
+          <div :class="['play',isPlaying?'playing':'paused']" @click="play"></div>
+        </div>
+        <div class="duration-indicator-bg" v-if="mini">
+          <div class="duration-indicator" :style="{'transform':timeRatio}"></div>
+        </div>
       </div>
-      <div class="control">
-        <div :class="['play',isPlaying?'playing':'paused']" @click="play"></div>
-      </div>
-      <div class="duration-indicator-bg" v-if="mini">
-        <div class="duration-indicator" :style="{'transform':timeRatio}"></div>
-      </div>
+      <div class="togglemini" v-if="!mini" @click="toggleMini"></div>
+      <audio :src="url?url.url:''" id="player" ref="player"></audio>
     </div>
-    <div class="togglemini" v-if="!mini" @click="toggleMini"></div>
-    <audio :src="url?url.url:''" id="player" ref="player"></audio>
-  </div>
 </template>
 
 <script>
@@ -41,7 +41,8 @@ export default {
   computed: {
     ...mapState({
       detail: state => state.song.detail[0],
-      url: state => state.song.url
+      url: state => state.song.url,
+      queue: state => state.song.queue
     }),
     timeRatio() {
       const ratio = this.currentTime / this.duration * 100 - 100;
@@ -56,9 +57,15 @@ export default {
         player.load();
         player.oncanplay = () => {
           player.play();
-          console.log(player.duration);
           this.duration = player.duration;
         };
+      }
+    },
+    currentTime(now, prev) {
+      if (now === this.duration) {
+        this.$store.dispatch('song/url', id);
+        this.$store.dispatch('song/detail', id);
+        console.log('end')
       }
     }
   },
@@ -66,9 +73,11 @@ export default {
     const player = this.$refs.player;
     player.addEventListener('playing', () => {
       this.isPlaying = true;
+      this.$store.dispatch('song/play');
     });
     player.addEventListener('pause', () => {
       this.isPlaying = false;
+      this.$store.dispatch('song/pause');
     });
     player.addEventListener('timeupdate', () => {
       this.currentTime = player.currentTime;
@@ -105,31 +114,35 @@ export default {
   left: 0
   right: 0
   background-color: #7b5757
-  transition: all .3s ease-in-out
   z-index: 999
   height: 48px
-  transition: all 300ms
+  transition: all 1s
   &.show
       bottom: 0
       opacity: 1
 
   .player
-    display: flex
-    flex-direction: row
-    align-items: center
     height: 48px
     position: relative
-    transition: all 300ms
+    transition: all 1s
     .cover
+      position: absolute
+      bottom: 0
+      left: 0
       height: 48px
       width: 48px
+      transition: all 1s
       img
         height: 100%
         width: 100%
+        transition: all 400ms
         &.paused
           animation-play-state: paused
 
     .info
+      position: absolute
+      top: 0
+      left: 48px
       height: 100%
       display: flex
       flex-direction: column
@@ -150,7 +163,7 @@ export default {
       bottom: 0
       height: 48px
       width: 48px
-      transition: all 300ms
+      transition: all 1s
       .play
         background-repeat: no-repeat
         background-position: center center
@@ -180,20 +193,18 @@ export default {
         transition: width 1000ms linear
   &.full
     bottom: 0
-    height: 100vh
+    height: 100%
     .player
       height: 100%
       width: 100%
     .info
-      position: absolute
       top: 0
       left: 0
       height: 3.2rem
     .cover
-      position: absolute
       left: 50%
-      top: 50%
-      transform: translate(-50%, -50%)
+      bottom: 50%
+      transform: translate(-50%, 50%)
       width: 240px
       height: 240px
       img
