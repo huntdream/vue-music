@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { API_SERVER, INIT_ID } from '../config';
 
-axios.defaults.baseURL = 'https://netease.maoyu.info';
+axios.defaults.baseURL = API_SERVER;
 
-const id = 32693089;
+const id = INIT_ID;
 
 export const userdetail = () =>
   axios.get(`/user/detail?uid=${id}`).then(res => res.data);
