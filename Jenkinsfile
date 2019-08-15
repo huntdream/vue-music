@@ -12,7 +12,6 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh 'whoami'
                 sh 'chmod +x ./jenkins/scripts/deploy.sh'
                 sh './jenkins/scripts/deploy.sh'
             }
